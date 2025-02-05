@@ -10,11 +10,16 @@ async function query(queryObject) {
     password: process.env.POSTGRES_PASSWORD,
   });
   await client.connect();
-  const result = await client.query(queryObject); // ---> passando o SQL como parametro da função
-  // const result = await client.query("SELECT $1::text as message", ["Hello world!",]); ---> passando o SQL direto como string
-  //console.log(result.rows[0].message); ---> mostrando o resultado da primeira linha
-  await client.end();
-  return result;
+  try {
+    const result = await client.query(queryObject); // ---> passando o SQL como parametro da função
+    // const result = await client.query("SELECT $1::text as message", ["Hello world!",]); ---> passando o SQL direto como string
+    //console.log(result.rows[0].message); ---> mostrando o resultado da primeira linha
+    return result;
+  } catch (error) {
+    console.error("Erro ao conectar com o banco de dados: ", error);
+  } finally {
+    await client.end();
+  }
 }
 
 export default {
