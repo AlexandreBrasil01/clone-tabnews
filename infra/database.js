@@ -31,12 +31,14 @@ async function getNewClient() {
   return client;
 }
 
-export default {
+const database = {
   // Exportar deste modo com os nomes identicos (query: query, getNewClient: getNewClient,)
   //  se torna redundante e pode ser feito como está apos os comentarios
   query,
   getNewClient,
 };
+
+export default database;
 
 function getSSLValues() {
   if (process.env.POSTGRES_CA) {
