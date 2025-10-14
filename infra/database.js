@@ -10,10 +10,11 @@ async function query(queryObject) {
     //console.log(result.rows[0].message); ---> mostrando o resultado da primeira linha
     return result;
   } catch (error) {
-    console.error("Erro ao conectar com o banco de dados: ", error);
+    console.log("\n Erro ao conectar com o banco de dados: ");
+    console.error(error);
     throw error;
   } finally {
-    await client.end();
+    await client?.end();
   }
 }
 
